@@ -104,15 +104,20 @@ restService.post("/chatbot", function(req, res) {
                 if(aHr.length==2){
                     var numero = aHr[0];
                     var gestion= aHr[1];
-                    var ruta = "http://sinra.inra.gob.bo:8104/api/sinadi/v1/hojaRutaBot/navegar?tipoDatoBusqueda=BNHG&pagina=0&cantidad=1&datoBusqueda=" +numero+"&datoBusqueda2="+gestion;
+                    var gestion= aHr[2];
+                    var ruta = "http://sinra.inra.gob.bo:8104/api/sinadi/v1/hojaRuta/chatBoot/consultar?numHojaRuta=" +numero+"&gestion="+gestion;
+                    //var ruta = "http://sinra.inra.gob.bo:8104/api/sinadi/v1/hojaRutaBot/navegar?tipoDatoBusqueda=BNHG&pagina=0&cantidad=1&datoBusqueda=" +numero+"&datoBusqueda2="+gestion;
                     // var ruta = "http://172.17.0.226:8104/api/sinadi/v1/hojaRutaBot/navegar?tipoDatoBusqueda=BNHG&pagina=0&cantidad=1&datoBusqueda=" +numero+"&datoBusqueda2="+gestion;;
                     console.log(ruta);
                     request({url:ruta,json:true},function (error, response, body) {
                         // console.log(body['parcela']);
                         if(body.listHojaRuta && body.listHojaRuta.length>0){
-                            var referencia = body['listHojaRuta'][0]['referencia']?body['listHojaRuta'][0]['referencia']:'S/N';
-                            var estado = body['listHojaRuta'][0]['estadoTramite']?body['listHojaRuta'][0]['estadoTramite']:'S/N';
-                            speech = 'REFERENCIA: '+referencia+'. ESTADO: '+estado;
+                            //var referencia = body['listHojaRuta'][0]['referencia']?body['listHojaRuta'][0]['referencia']:'S/N';
+                            //var estado = body['listHojaRuta'][0]['estadoTramite']?body['listHojaRuta'][0]['estadoTramite']:'S/N';
+                            var referencia = body['referencia']?body['referencia']:'S/N';
+                            var estado = body['estado']?body['estado']:'S/N';
+                            var destino = body['destino']?body['destino']:'S/N';
+                            speech = 'REFERENCIA: '+referencia+'. DESTINO: '+destino+'. ESTADO: '+estado;
                         }else{
                             speech = "No se encontró hojas de rutas con la información solicitada";
                         }
