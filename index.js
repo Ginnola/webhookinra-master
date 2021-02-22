@@ -101,7 +101,7 @@ restService.post("/chatbot", function(req, res) {
                 hr= hr.trim().toUpperCase().replace('-','');
                 var aHr = hr.split('/');
 
-                if(aHr.length==2){
+                if(aHr.length==3){
                     var numero = aHr[0];
                     var gestion= aHr[1];
                     var idDepartamental= aHr[2];
