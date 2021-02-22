@@ -105,7 +105,7 @@ restService.post("/chatbot", function(req, res) {
                     var numero = aHr[0];
                     var gestion= aHr[1];
                     var gestion= aHr[2];
-                    var ruta = "http://sinra.inra.gob.bo:8104/api/sinadi/v1/hojaRuta/chatBoot/consultar?numHojaRuta=" +numero+"&gestion="+gestion;
+                    var ruta = "http://sinra.inra.gob.bo:8104/api/sinadi/v1/hojaRuta/chatBoot/consultar?numHojaRuta=" +numero+"&gestion="+gestion+"&idDepartamental="+idDepartamental; 
                     //var ruta = "http://sinra.inra.gob.bo:8104/api/sinadi/v1/hojaRutaBot/navegar?tipoDatoBusqueda=BNHG&pagina=0&cantidad=1&datoBusqueda=" +numero+"&datoBusqueda2="+gestion;
                     // var ruta = "http://172.17.0.226:8104/api/sinadi/v1/hojaRutaBot/navegar?tipoDatoBusqueda=BNHG&pagina=0&cantidad=1&datoBusqueda=" +numero+"&datoBusqueda2="+gestion;;
                     console.log(ruta);
