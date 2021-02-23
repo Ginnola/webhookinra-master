@@ -112,8 +112,7 @@ restService.post("/chatbot", function(req, res) {
                     request({url:ruta,json:true},function (error, response, body) {
                         // console.log(body['parcela']);
                         //if(body.listHojaRuta && body.listHojaRuta.length>0){
-                        if(body.mensajes){
-                            console.log(mensajes);
+                        if(body){
                             //var referencia = body['listHojaRuta'][0]['referencia']?body['listHojaRuta'][0]['referencia']:'S/N';
                             //var estado = body['listHojaRuta'][0]['estadoTramite']?body['listHojaRuta'][0]['estadoTramite']:'S/N';
                             var referencia = body['referencia']?body['referencia']:'S/N';
