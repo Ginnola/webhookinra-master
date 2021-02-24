@@ -102,17 +102,18 @@ restService.post("/chatbot", function(req, res) {
                 var aHr = hr.split('/');
 
                 if(aHr.length==3){
-                    var numero = aHr[0];
-                    var gestion= aHr[1];
-                    var idDepartamental= aHr[2];
-                    var ruta = "http://sinra.inra.gob.bo:8106/api/v1/extranet/sinadi/hojaRuta/consultar?numHojaRuta=" +numero+"&gestion="+gestion+"&idDepartamental="+idDepartamental; 
+                    var departamental = aHr[0];
+                    var numero = aHr[1];
+                    var gestion = aHr[2];
+                    var ruta = "http://sinra.inra.gob.bo:8106/api/v1/extranet/sinadi/hojaRuta/consultar?departamental=" +departamental+"&numHojaRuta="+numero+"&gestion="+gestion; 
                     //var ruta = "http://sinra.inra.gob.bo:8104/api/sinadi/v1/hojaRutaBot/navegar?tipoDatoBusqueda=BNHG&pagina=0&cantidad=1&datoBusqueda=" +numero+"&datoBusqueda2="+gestion;
                     // var ruta = "http://172.17.0.226:8104/api/sinadi/v1/hojaRutaBot/navegar?tipoDatoBusqueda=BNHG&pagina=0&cantidad=1&datoBusqueda=" +numero+"&datoBusqueda2="+gestion;;
                     console.log(ruta);
                     request({url:ruta,json:true},function (error, response, body) {
                         // console.log(body['parcela']);
                         //if(body.listHojaRuta && body.listHojaRuta.length>0){
-                        if(body){
+                        if(body && body['referencia']){
+                            //console.log(body);
                             //var referencia = body['listHojaRuta'][0]['referencia']?body['listHojaRuta'][0]['referencia']:'S/N';
                             //var estado = body['listHojaRuta'][0]['estadoTramite']?body['listHojaRuta'][0]['estadoTramite']:'S/N';
                             var referencia = body['referencia']?body['referencia']:'S/N';
@@ -120,7 +121,7 @@ restService.post("/chatbot", function(req, res) {
                             var destino = body['destino']?body['destino']:'S/N';
                             speech = 'REFERENCIA: '+referencia+'. DESTINO: '+destino+'. ESTADO: '+estado;
                         }else{
-                            speech = "No se encontró hojas de rutas con la información solicitada";
+                            speech = "No se encontró hojas de ruta con la información solicitada";
                         }
                         respuesta(res, speech);
                     });
